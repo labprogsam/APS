@@ -1,4 +1,4 @@
-# ASP
+# APS
 Repositório para centralizar todas as etapas do projeto da disciplina de Análise de Projetos e Sistemas
 
 Equipe:
