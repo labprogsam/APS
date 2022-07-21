@@ -17,3 +17,6 @@ um plano para acesso ao aplicativo.
 
 Link do protótipo no figma:
 https://www.figma.com/file/Hq1WGakMbIyK3KWSQU4ao0/Wireframe-Projet%C3%A3o?node-id=5%3A378
+
+Link do MIRO (casos de uso):
+https://miro.com/welcomeonboard/VWVzWXZsSlc0VFRUcThzMFBlSWRNamtydnVGc3J6eVpXYzdWVTJWVThUTlpWaVFDS2wyN2VGQnljYzdsZ1BiaHwzMDc0NDU3MzQ3MTQ2Mzk5Njgw?share_link_id=166961575750
