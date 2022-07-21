@@ -1,5 +1,5 @@
 # ASP
-Repositório para centralizar todas as etapas do projeto da disciplina de Análise e Desenvolvimento de Projeto
+Repositório para centralizar todas as etapas do projeto da disciplina de Análise de Projetos e Sistemas
 
 Equipe:
 - Johnny Herbert Muniz Nunes (jhmn)
