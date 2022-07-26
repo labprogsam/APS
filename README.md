@@ -20,3 +20,6 @@ https://www.figma.com/file/Hq1WGakMbIyK3KWSQU4ao0/Wireframe-Projet%C3%A3o?node-i
 
 Link do MIRO (casos de uso):
 https://miro.com/welcomeonboard/VWVzWXZsSlc0VFRUcThzMFBlSWRNamtydnVGc3J6eVpXYzdWVTJWVThUTlpWaVFDS2wyN2VGQnljYzdsZ1BiaHwzMDc0NDU3MzQ3MTQ2Mzk5Njgw?share_link_id=166961575750
+
+doc com os casos de usos do projeto:
+https://docs.google.com/document/d/1WtCPMoohGe-rLnSW-pmzFg_1dZdYwDcTDbg-RJT-0us/edit
