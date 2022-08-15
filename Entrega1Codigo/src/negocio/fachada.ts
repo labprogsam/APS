@@ -13,7 +13,11 @@ export class Fachada {
     return this.verAtividadeControlador.verAtividades();
   }
 
-  criarAtividade(atividade: Atividade): void {
+  verAtividadePorId(id: string): Atividade | undefined {
+    return this.verAtividadeControlador.verAtividadePorId(id);
+  }
+
+  criarAtividade(atividade: Omit<Atividade, 'id'>): void {
     return this.verAtividadeControlador.criarAtividade(atividade);
   }
 

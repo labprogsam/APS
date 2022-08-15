@@ -1,0 +1,33 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<form id="editar-atividade" >
+  <label for="titulo">Titulo:</label>
+  <input type="text" id="titulo" name="titulo"><br><br>
+
+  <label for="recompensa">Recompensa:</label>
+  <input type="text" id="recompensa" name="recompensa"><br><br>
+
+  <label for="frequencia">Frequencia:</label>
+  <input type="text" id="frequencia" name="frequencia"><br><br>
+
+  <label for="concluida">Concluida:</label>
+  <input type="text" id="concluida" name="concluida"><br><br>
+
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  $(document).ready(function(){
+    $( "#editar-atividade" ).submit(function( event ) {
+      event.preventDefault();
+
+      var $form = $( this );
+      var titulo = $form.find( "input[name='titulo']" ).val();
+      var recompensa = $form.find( "input[name='recompensa']" ).val();
+      var frequencia = $form.find( "input[name='frequencia']" ).val();
+      var concluida = $form.find( "input[name='concluida']" ).val();
+
+      $.post( "/atividades/editar", { titulo, recompensa, frequencia, concluida }, () => {} ,'json');
+    });
+  });
+</script>

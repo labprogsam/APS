@@ -9,6 +9,10 @@ export class CadastroAtividade {
     return atividadeRepository.verAtividades();
   }
 
+  verAtividadePorId(id: string): Atividade | undefined {
+    return atividadeRepository.verAtividadePorId(id);
+  }
+
   criarAtividade(atividade: Atividade): void {
     return atividadeRepository.criarAtividade(atividade);
   }

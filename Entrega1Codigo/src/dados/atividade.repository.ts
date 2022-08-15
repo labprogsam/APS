@@ -27,6 +27,10 @@ export class AtividadeRepository implements IAtividadeRepository {
     this.atividades.push(atividade);
   }
 
+  verAtividadePorId(id: string): Atividade | undefined {
+    return this.atividades.find((atividade) => atividade.id === id);
+  }
+
   editarAtividade(atividadeToUpdate: Atividade): void {
     const atividadeAlreadyExists = this.atividades.find((atividade) => atividadeToUpdate.id === atividade.id);
     if(atividadeAlreadyExists) {
