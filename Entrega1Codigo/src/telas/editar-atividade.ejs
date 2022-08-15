@@ -2,16 +2,16 @@
 
 <form id="editar-atividade" >
   <label for="titulo">Titulo:</label>
-  <input type="text" id="titulo" name="titulo"><br><br>
+  <input value="<%= atividade.titulo %>" type="text" id="titulo" name="titulo"><br><br>
 
   <label for="recompensa">Recompensa:</label>
-  <input type="text" id="recompensa" name="recompensa"><br><br>
+  <input value="<%= atividade.recompensa %>" type="text" id="recompensa" name="recompensa"><br><br>
 
   <label for="frequencia">Frequencia:</label>
-  <input type="text" id="frequencia" name="frequencia"><br><br>
+  <input value="<%= atividade.frequencia %>" type="text" id="frequencia" name="frequencia"><br><br>
 
   <label for="concluida">Concluida:</label>
-  <input type="text" id="concluida" name="concluida"><br><br>
+  <input value="<%= atividade.concluida %>" type="text" id="concluida" name="concluida"><br><br>
 
   <input type="submit" value="Submit">
 </form>
@@ -27,7 +27,7 @@
       var frequencia = $form.find( "input[name='frequencia']" ).val();
       var concluida = $form.find( "input[name='concluida']" ).val();
 
-      $.post( "/atividades/editar", { titulo, recompensa, frequencia, concluida }, () => {} ,'json');
+      $.post( "/atividades/editar/<%= atividade.id %>", { titulo, recompensa, frequencia, concluida }, () => {} ,'json');
     });
   });
 </script>
