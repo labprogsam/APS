@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && tsc && npm run copy-files",
     "copy-files": "copyfiles --error --up 1 src/**/*.ejs dist",
-    "start": "npx nodemon --exec 'npm run build && node dist/server.js' --watch src -e ts,ejs"
+    "start": "npx nodemon --exec 'npm run build && node dist/comunicacao/server.js' --watch src -e ts,ejs"
   },
   "keywords": [],
   "author": "",

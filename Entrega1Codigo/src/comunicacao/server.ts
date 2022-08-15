@@ -1,17 +1,17 @@
 import path from 'path';
 import express from 'express';
-import { Fachada } from './fachada';
+import { Fachada } from '../negocio/fachada';
 
 const app = express();
 const port = 3000;
 
 app.set('view engine', 'ejs');
-app.set('views', [path.join(__dirname,'./atividade/views')]);
+app.set('views', [path.join(__dirname,'../telas')]);
 
 const fachada = new Fachada();
 
 app.get('/atividades', (req, res) => {
-  const atividades = fachada.getAllAtividades();
+  const atividades = fachada.verAtividadesAtividades();
   res.render('ver-atividades', { atividades });
 });
 
