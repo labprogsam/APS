@@ -11,7 +11,7 @@ app.set('views', [path.join(__dirname,'../telas')]);
 const fachada = new Fachada();
 
 app.get('/atividades', (req, res) => {
-  const atividades = fachada.verAtividadesAtividades();
+  const atividades = fachada.verAtividades();
   res.render('ver-atividades', { atividades });
 });
 

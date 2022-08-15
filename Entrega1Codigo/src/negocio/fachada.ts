@@ -9,7 +9,23 @@ export class Fachada {
     this.verAtividadeControlador = new ControladorAtividade();
   }
 
-  verAtividadesAtividades(): Atividade[] {
+  verAtividades(): Atividade[] {
     return this.verAtividadeControlador.verAtividades();
+  }
+
+  criarAtividade(atividade: Atividade): void {
+    return this.verAtividadeControlador.criarAtividade(atividade);
+  }
+
+  editarAtividade(atividade: Atividade): void {
+    return this.verAtividadeControlador.editarAtividade(atividade);
+  }
+
+  excluirAtividade(id: string): void {
+    return this.verAtividadeControlador.excluirAtividade(id);
+  }
+
+  marcarAtividadeComoConcluida(id: string): void {
+    return this.verAtividadeControlador.marcarAtividadeComoConcluida(id);
   }
 }
