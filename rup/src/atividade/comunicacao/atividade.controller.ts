@@ -1,29 +1,29 @@
-import { Atividade } from "./atividade.entity";
-import { CadastroAtividade } from "./atividade.cadastro";
+import { Request, Response } from "express";
+import { Atividade } from "../negocio/atividade.entity";
+import { ControladorAtividade } from "../negocio/atividade.controlador";
 
-export class ControladorAtividade {
-  private cadastroAtividade: CadastroAtividade;
+export class AtividadeController {
+  private controladorAtividade: ControladorAtividade;
 
   constructor() {
-    this.cadastroAtividade = new CadastroAtividade();
+    this.controladorAtividade = new ControladorAtividade();
   }
   
-  verAtividades(): Atividade[] {
-    return this.cadastroAtividade.verAtividades();
+  async verAtividades(request: Request, response: Response) {
+    const atividades = await this.controladorAtividade.verAtividades();
+    response.json(atividades);
   }
 
   verAtividadePorId(id: string): Atividade | undefined {
-    return this.cadastroAtividade.verAtividadePorId(id);
+    return this.controladorAtividade.verAtividadePorId(id);
   }
 
   criarAtividade({ titulo, recompensa, concluida, frequencia }: Omit<Atividade, 'id'>): void {
-    console.log({ titulo, recompensa, concluida, frequencia });
-    
     if(!titulo || !recompensa ||  isNaN(+recompensa) || !frequencia ||  isNaN(+frequencia) || !concluida) {
       throw Error('Dados Incompletos')
     }
 
-    return this.cadastroAtividade.criarAtividade({ 
+    return this.controladorAtividade.criarAtividade({ 
       id: this.makeId(8),
       titulo,
       recompensa: +recompensa,
@@ -33,15 +33,15 @@ export class ControladorAtividade {
   }
 
   editarAtividade(atividade: Atividade): void {
-    return this.cadastroAtividade.editarAtividade(atividade);
+    return this.controladorAtividade.editarAtividade(atividade);
   }
 
   excluirAtividade(id: string): void {
-    return this.cadastroAtividade.excluirAtividade(id);
+    return this.controladorAtividade.excluirAtividade(id);
   }
 
   marcarAtividadeComoConcluida(id: string): void {
-    return this.cadastroAtividade.marcarAtividadeComoConcluida(id);
+    return this.controladorAtividade.marcarAtividadeComoConcluida(id);
   }
 
   private makeId(length: number) {

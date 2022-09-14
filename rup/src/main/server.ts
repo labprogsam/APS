@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import bodyParser from "body-parser";
-import { Fachada } from '../negocio/fachada';
+import { Fachada } from './fachada';
 
 const app = express();
 const port = 3000;
