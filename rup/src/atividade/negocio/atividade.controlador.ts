@@ -1,3 +1,4 @@
+import { Optional } from 'utility-types';
 import { Atividade } from "./atividade.entity";
 import { CadastroAtividade } from "./atividade.cadastro";
 
@@ -22,8 +23,13 @@ export class ControladorAtividade {
     await this.cadastroAtividade.criarAtividade(atividade);
   }
 
-  async editarAtividade(atividade: Atividade): Promise<void> {
-    await this.cadastroAtividade.editarAtividade(atividade);
+  async editarAtividade(atividade: Optional<Atividade, 'titulo' | 'recompensa' | 'frequencia' | 'concluida'>): Promise<void> {
+    const atividadeJaExiste = await this.cadastroAtividade.verAtividadePorId(atividade.id);
+    if (!atividadeJaExiste) {
+      return;
+    }
+
+    await this.cadastroAtividade.editarAtividade({...atividadeJaExiste, ...atividade});
   }
 
   async excluirAtividade(id: string): Promise<void> {

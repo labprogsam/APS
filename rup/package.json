@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && tsc && npm run copy-files",
     "copy-files": "copyfiles --error --up 1 src/**/*.ejs dist",
-    "start": "npx nodemon --exec 'npm run build && node dist/comunicacao/server.js' --watch src -e ts,ejs",
+    "start": "npx nodemon --exec 'npm run build && node dist/main/server.js' --watch src -e ts,ejs",
     "prisma:generate": "npx prisma generate --schema=./src/main/prisma/schema.prisma",
     "prisma:migration": "npx prisma migrate dev --schema=./src/main/prisma/schema.prisma --name",
     "prisma:migration:push": "npx prisma migrate deploy --schema=./src/main/prisma/schema.prisma",
@@ -26,8 +26,11 @@
   "dependencies": {
     "@prisma/client": "^4.3.1",
     "@types/node": "^18.7.15",
+    "dotenv": "^16.0.2",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "utility-types": "^3.10.0",
+    "uuidv4": "^6.2.13"
   }
 }

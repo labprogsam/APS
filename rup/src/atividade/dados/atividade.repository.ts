@@ -47,7 +47,7 @@ export class AtividadeRepository implements IAtividadeRepository {
   }
 
   async excluirAtividade(id: string): Promise<void> {
-    this.prismaConnection.atividade.delete({
+    await this.prismaConnection.atividade.delete({
       where: {
         id  
       }

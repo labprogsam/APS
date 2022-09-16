@@ -1,57 +1,79 @@
 import { Request, Response } from "express";
-import { Atividade } from "../negocio/atividade.entity";
-import { ControladorAtividade } from "../negocio/atividade.controlador";
+import { uuid } from 'uuidv4';
+import { Optional } from 'utility-types';
+import { ControladorAtividade, Atividade } from "../negocio";
+
 
 export class AtividadeController {
-  private controladorAtividade: ControladorAtividade;
+  controladorAtividade: ControladorAtividade;
 
   constructor() {
     this.controladorAtividade = new ControladorAtividade();
   }
   
-  async verAtividades(request: Request, response: Response) {
+  verAtividades = async (request: Request, response: Response) => {
     const atividades = await this.controladorAtividade.verAtividades();
-    response.json(atividades);
+    response.status(200).json(atividades);
   }
 
-  verAtividadePorId(id: string): Atividade | undefined {
-    return this.controladorAtividade.verAtividadePorId(id);
+   verAtividadePorId = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const atividade = await this.controladorAtividade.verAtividadePorId(id);
+
+    if(atividade) response.status(200).json({}); 
+
+    response.status(200).json(atividade);
   }
 
-  criarAtividade({ titulo, recompensa, concluida, frequencia }: Omit<Atividade, 'id'>): void {
-    if(!titulo || !recompensa ||  isNaN(+recompensa) || !frequencia ||  isNaN(+frequencia) || !concluida) {
-      throw Error('Dados Incompletos')
+  criarAtividade = async (request: Request, response: Response) => {
+
+    const { titulo, recompensa, frequencia, concluida } = request.body;
+
+    if(!titulo || !recompensa ||  isNaN(recompensa) || !frequencia ||  isNaN(frequencia)) {
+      response.status(400).json({
+        error: "Dados incorretos."
+      });
     }
 
-    return this.controladorAtividade.criarAtividade({ 
-      id: this.makeId(8),
+    await this.controladorAtividade.criarAtividade({ 
+      id: uuid(),
       titulo,
-      recompensa: +recompensa,
-      frequencia: +frequencia,
-      concluida,
+      recompensa,
+      frequencia,
+      concluida: concluida ?? false,
     });
+
+    response.status(201).json()
   }
 
-  editarAtividade(atividade: Atividade): void {
-    return this.controladorAtividade.editarAtividade(atividade);
-  }
+  editarAtividade = async (request: Request, response: Response) => {
+    const { id } = request.params;
+    const { titulo, recompensa, frequencia, concluida } = request.body;
 
-  excluirAtividade(id: string): void {
-    return this.controladorAtividade.excluirAtividade(id);
-  }
-
-  marcarAtividadeComoConcluida(id: string): void {
-    return this.controladorAtividade.marcarAtividadeComoConcluida(id);
-  }
-
-  private makeId(length: number) {
-    let result           = '';
-    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
-      charactersLength));
+    if((recompensa &&  isNaN(recompensa)) || (frequencia &&  isNaN(frequencia))) {
+      response.status(400).json({
+        error: "Dados incorretos."
+      });
     }
-    return result;
+
+    const atividade: Optional<Atividade, 'titulo' | 'recompensa' | 'frequencia' | 'concluida'> = {
+      id,
+      titulo,
+      recompensa,
+      frequencia,
+      concluida
+    }
+
+    await this.controladorAtividade.editarAtividade(atividade);
+
+    response.status(200).json()
+  }
+
+  excluirAtividade = async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    await this.controladorAtividade.excluirAtividade(id);
+    response.status(204).json();
   }
 }
