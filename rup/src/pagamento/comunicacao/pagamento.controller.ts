@@ -13,9 +13,9 @@ export class AtividadeController {
   
   gerarBoleto = async (request: Request, response: Response) => {
 
-    const { cpf } = request.body;
+    const { cpf, responsavelId } = request.body;
 
-    if(!cpf) {
+    if(!cpf || !responsavelId) {
       response.status(400).json({
         error: "Dados incorretos."
       });
@@ -23,7 +23,8 @@ export class AtividadeController {
 
     await this.controladorPagamento.criarPagamentoBoleto({ 
       id: uuid(),
-      cpf
+      cpf,
+      responsavelId
     });
 
     response.status(201).json()
@@ -31,9 +32,9 @@ export class AtividadeController {
 
   efetuarPagamentoCartao = async (request: Request, response: Response) => {
 
-    const { nomeNoCartao, dataDeVencimento, tipo, numeroDoCartao, cvv } = request.body;
+    const { nomeNoCartao, dataDeVencimento, tipo, numeroDoCartao, cvv, responsavelId } = request.body;
 
-    if(!nomeNoCartao || !dataDeVencimento || !numeroDoCartao || !cvv || !tipo) {
+    if(!nomeNoCartao || !dataDeVencimento || !numeroDoCartao || !cvv || !tipo || !responsavelId) {
       response.status(400).json({
         error: "Dados incorretos."
       });
@@ -45,7 +46,8 @@ export class AtividadeController {
       dataDeVencimento, 
       tipo,
       numeroDoCartao, 
-      cvv
+      cvv,
+      responsavelId
     });
 
     response.status(201).json()
