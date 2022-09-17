@@ -18,3 +18,25 @@ model Atividade {
 
   @@map("atividade")
 }
+
+model PagamentoBoleto {
+  id               String   @id @default(uuid()) @db.Uuid
+  boletoExternalId String   @map("boleto_external_id")
+  responsavelId    String   @map("responsavel_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("pagamento_boleto")
+}
+
+model PagamentoCartao {
+  id            String   @id @default(uuid()) @db.Uuid
+  data          String
+  hora          String
+  valor         Decimal
+  responsavelId String   @map("responsavel_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("pagamento_cartao")
+}

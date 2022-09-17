@@ -6,17 +6,15 @@ class PrismaConnector {
   client: null | PrismaClient = null;
 
   connect(url?: string): PrismaClient {
-    if (this.client !== null) {
-      return this.client;
-    }
-
-    this.client = new PrismaClient({
-      datasources: {
-        db: {
-          url: url || this.url,
+    if (this.client === null) {
+      this.client = new PrismaClient({
+        datasources: {
+          db: {
+            url: url || this.url,
+          },
         },
-      },
-    });
+      });
+    }
 
     return this.client;
   }
