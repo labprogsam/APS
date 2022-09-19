@@ -1,25 +1,26 @@
-import { Request, Response } from "express";
 import { uuid } from 'uuidv4';
 import { Optional } from 'utility-types';
-import { ControladorAtividade, Atividade } from "../negocio";
+import { Request, Response } from "express";
+import { Fachada } from "../fachada";
+import { Atividade } from "../../atividade";
 
 
 export class AtividadeController {
-  controladorAtividade: ControladorAtividade;
+  fachada: Fachada;
 
   constructor() {
-    this.controladorAtividade = new ControladorAtividade();
+    this.fachada = new Fachada();
   }
   
   verAtividades = async (request: Request, response: Response) => {
-    const atividades = await this.controladorAtividade.verAtividades();
+    const atividades = await this.fachada.verAtividades();
     response.status(200).json(atividades);
   }
 
    verAtividadePorId = async (request: Request, response: Response) => {
     const { id } = request.params;
 
-    const atividade = await this.controladorAtividade.verAtividadePorId(id);
+    const atividade = await this.fachada.verAtividadePorId(id);
 
     if(atividade) response.status(200).json({}); 
 
@@ -36,7 +37,7 @@ export class AtividadeController {
       });
     }
 
-    await this.controladorAtividade.criarAtividade({ 
+    await this.fachada.criarAtividade({ 
       id: uuid(),
       titulo,
       recompensa,
@@ -65,7 +66,7 @@ export class AtividadeController {
       concluida
     }
 
-    await this.controladorAtividade.editarAtividade(atividade);
+    await this.fachada.editarAtividade(atividade);
 
     response.status(200).json()
   }
@@ -73,7 +74,7 @@ export class AtividadeController {
   excluirAtividade = async (request: Request, response: Response) => {
     const { id } = request.params;
 
-    await this.controladorAtividade.excluirAtividade(id);
+    await this.fachada.excluirAtividade(id);
     response.status(204).json();
   }
 }

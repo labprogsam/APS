@@ -1,7 +1,6 @@
-import path from 'path';
-import express, { Request } from 'express';
+import express from 'express';
 import bodyParser from "body-parser";
-import { Fachada } from './fachada';
+import { AtividadeController } from './comunicacao';
 
 const app = express();
 const port = 3000;
@@ -9,17 +8,17 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const fachada = new Fachada();
+const atividadeController = new AtividadeController();
 
-app.get('/atividades', fachada.atividade.verAtividades);
+app.get('/atividades', atividadeController.verAtividades);
 
-app.get('/atividades/:id', fachada.atividade.verAtividadePorId);
+app.get('/atividades/:id', atividadeController.verAtividadePorId);
 
-app.post('/atividades', fachada.atividade.criarAtividade);
+app.post('/atividades', atividadeController.criarAtividade);
 
-app.patch('/atividades/:id', fachada.atividade.editarAtividade);
+app.patch('/atividades/:id', atividadeController.editarAtividade);
 
-app.delete('/atividades/:id', fachada.atividade.excluirAtividade);
+app.delete('/atividades/:id', atividadeController.excluirAtividade);
 
 app.listen(port,() => {
     console.log(`Servidor rodando na porta ${port}`);

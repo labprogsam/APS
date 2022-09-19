@@ -1,4 +1,4 @@
-import { Atividade } from "../negocio/atividade.entity";
+import { Atividade } from "./atividade.entity";
 
 export interface IAtividadeRepository {
   verAtividades(): Promise<Atividade[]>,

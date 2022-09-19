@@ -1,5 +1,5 @@
 import { Atividade } from "./atividade.entity";
-import { atividadeRepository } from "../dados";
+import { atividadeRepository } from "./atividade.repository";
 
 export class CadastroAtividade {
 
