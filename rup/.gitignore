@@ -2,3 +2,6 @@ dist/
 node_modules/
 .env
 data/
+yarn.lock
+yarn-error.log
+package-lock.json
