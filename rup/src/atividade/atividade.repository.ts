@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import { prismaConnector } from "../../main/prisma/prisma-connector";
+import { prismaConnector } from "../main/prisma/prisma-connector";
 
-import { Atividade } from "../negocio/atividade.entity";
+import { Atividade } from "./atividade.entity";
 import { IAtividadeRepository } from "./atividade.repository.interface";
 
 export class AtividadeRepository implements IAtividadeRepository {
