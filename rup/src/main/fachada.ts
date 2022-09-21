@@ -1,11 +1,15 @@
 import { Optional } from 'utility-types';
 import { Atividade, ControladorAtividade } from "../atividade";
+import { IFabricaRepositorio } from "./IFabricaRepositorio";
+import { FabricaRepositoryBDR } from "./FabricaRepositoryBDR";
 
 export class Fachada {
   private controladorAtividade: ControladorAtividade;
+  private fabricaRepositorio: IFabricaRepositorio;
 
   constructor() {
-    this.controladorAtividade = new ControladorAtividade();
+    this.fabricaRepositorio = new FabricaRepositoryBDR();
+    this.controladorAtividade = new ControladorAtividade(this.fabricaRepositorio.criarRepositorioAtividade());
   }
 
   async verAtividades(): Promise<Atividade[]> {

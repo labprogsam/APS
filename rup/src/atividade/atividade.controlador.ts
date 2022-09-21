@@ -1,12 +1,13 @@
 import { Optional } from 'utility-types';
 import { Atividade } from "./atividade.entity";
 import { CadastroAtividade } from "./atividade.cadastro";
+import { IAtividadeRepository } from "./atividade.repository.interface";
 
 export class ControladorAtividade {
   private cadastroAtividade: CadastroAtividade;
 
-  constructor() {
-    this.cadastroAtividade = new CadastroAtividade();
+  constructor(atividadeRepository: IAtividadeRepository) {
+    this.cadastroAtividade = new CadastroAtividade(atividadeRepository);
   }
   
   async verAtividades(): Promise<Atividade[]> {

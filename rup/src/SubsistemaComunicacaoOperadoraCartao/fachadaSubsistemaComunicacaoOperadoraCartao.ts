@@ -4,22 +4,23 @@ import {
   ParametrosSubSistemaPagamentoCartao, 
   ResultadoSubSistemaGerarBoleto 
 } from "./ISubsistemaComunicacaoOperadoraCartao"
-import * as AdapterOperadoraCartaoVisa from "./AdapterOperadoraCartaoVisa";
-import * as AdapterOperadoraCartaoMaster from "./AdapterOperadoraCartaoMaster";
+import { AdapterOperadoraCartao } from "./AdapterOperadoraCartao";
 
 export class FachadaSubsistemaOperadoraCartao extends ISubSistemaOperadoraCartao {
+
+  private adapterOperadoraCartao: AdapterOperadoraCartao;
+
+  constructor() {
+    super()
+    this.adapterOperadoraCartao = new AdapterOperadoraCartao();
+  }
+
   pagarPorCartao(parametros: ParametrosSubSistemaPagamentoCartao): void {
-    if (parametros.numeroDoCartao.charAt(0) === "4") {
-      AdapterOperadoraCartaoVisa.pagarPorCartao(parametros);
-    }else if (parametros.numeroDoCartao.charAt(0) === "5") {
-      AdapterOperadoraCartaoMaster.pagarPorCartao(parametros);
-    } else {
-      throw Error("Error")
-    }
+    this.adapterOperadoraCartao.pagarPorCartao(parametros);
   }
 
   gerarBoleto(parametros: ParametrosSubSistemaGerarBoleto): ResultadoSubSistemaGerarBoleto {
-    const boleto = AdapterOperadoraCartaoMaster.gerarBoleto(parametros);
+    const boleto = this.adapterOperadoraCartao.gerarBoleto(parametros);
     return boleto;
   }
 }
