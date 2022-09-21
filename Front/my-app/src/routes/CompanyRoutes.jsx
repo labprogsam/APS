@@ -1,34 +1,37 @@
-import Home from "../pages/Home/Home"
+import Home from "../pages/home"
 import AuthRedirect from './AuthRedirect'
-import VerAtividades from "../pages/ver-atividades"
+import VerAtividades from "../pages/Atividades/ver-atividades";
+import CriarAtividade from '../pages/Atividades/criar-atividade';
+import EditarAtividade from '../pages/Atividades/editar-atividade';
+import Login from '../pages/login'
 
 export const PublicRoutes = [
   {
-    name: "Home",
-    component: Home,
-    path: "/home",
-  },
-  {
-    name: "AuthRedirect",
-    component: AuthRedirect,
-    path: "/"
+    name: "Login",
+    component: Login,
+    path: "/login",
   },
 ]
 
 export const PrivateRoutes = [
   {
-    name: "AuthRedirect",
-    component: AuthRedirect,
-    path: "/"
+    name: "Home",
+    component: Home,
+    path: "/",
   },
   {
     name: "VerAtividade",
     component: VerAtividades,
-    path: "/ver-atividades"
+    path: "/atividades"
   },
-  // {
-  //   name: "CriarAtividade",
-  //   component: CriarAtividades,
-  //   path: "/criar-atividade"
-  // },
+  {
+    name: "CriarAtividade",
+    component: CriarAtividade,
+    path: "/atividades/criar"
+  },
+  {
+    name: "EditarAtividade",
+    component: EditarAtividade,
+    path: "/atividades/editar/:id"
+  },
 ]

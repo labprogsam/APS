@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && tsc && npm run copy-files",
     "copy-files": "copyfiles --error --up 1 src/**/*.ejs dist",
-    "start": "npx nodemon --exec 'npm run build && node dist/main/server.js' --watch src -e ts,ejs",
+    "start": "npm run prisma:migration:push && npx nodemon --exec 'npm run build && node dist/main/server.js' --watch src -e ts,ejs",
     "prisma:generate": "npx prisma generate --schema=./src/main/prisma/schema.prisma",
     "prisma:migration": "npx prisma migrate dev --schema=./src/main/prisma/schema.prisma --name",
     "prisma:migration:push": "npx prisma migrate deploy --schema=./src/main/prisma/schema.prisma",

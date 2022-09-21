@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { PublicRoutes, PrivateRoutes } from "./CompanyRoutes";
 
 const AppRoutes = () => {
-  const { isAuthenticated } = true;
+  const isAuthenticated = true;
 
   return (
     !isAuthenticated ? (
@@ -19,7 +19,7 @@ const AppRoutes = () => {
               />
             );
           })}
-          <Redirect to={'/'} />
+          <Redirect to={'/login'} />
         </Switch>
       </div>
     ) : (

@@ -1,23 +1,14 @@
 import React from 'react';
-import { useLRAuth } from "loginradius-react";
-import { Redirect } from "react-router-dom";
-import LoadingRadius from "components/LoadingRadius";
-import { StyledLoadingContent } from './styles';
+import { useHistory } from "react-router-dom";
 
 const AuthRedirect = () => {
-  const { isAuthenticated } = true;
-  const isLoading = true;
+  const isAuthenticated = true;
+  const history = useHistory();
 
-  if (isLoading) {
-    return (
-    <StyledLoadingContent>
-      <LoadingRadius/>
-    </StyledLoadingContent>
-    )
-  } else if (isAuthenticated) {
-    return <Redirect to={"/dashboard/relatorios"} />;
+  if (isAuthenticated) {
+    history.push('/');
   } else {
-    return <Redirect to={"/home"} />;
+    history.push('/login');
   }
 };
 

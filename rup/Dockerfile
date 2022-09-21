@@ -5,7 +5,7 @@ USER node
 
 WORKDIR /home/node
 
-COPY --chown=node:node package.json package-lock.json ./src/main/prisma/schema.prisma ./
+COPY --chown=node:node package.json ./src/main/prisma/schema.prisma ./
 
 RUN npm ci
 
