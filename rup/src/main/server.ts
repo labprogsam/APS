@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import express from 'express';
 import bodyParser from "body-parser";
 import { AtividadeController } from './comunicacao';
 
 const app = express();
-const port = 3001;
+const port = process.env.API_PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
