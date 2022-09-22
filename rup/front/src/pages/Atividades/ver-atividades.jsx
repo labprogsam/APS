@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getAtividades, excluirAtividade, marcarComoConcluida } from '../../services/atividade';
 
 function VerAtividades() {
-  const [data, setData] = useState([
-    {
-      id: 123,
-      titulo: 'teste',
-      recompensa: 123,
-      frequencia: 2,
-      concluida: true
-    }
-  ]);
+  const [data, setData] = useState([]);
 
-  const handleCheck = (id) => {
-    // make request
+  const getData = async () => {
+    try {
+      const response = await getAtividades();
+      console.log(response.data)
+      setData(response?.data);
+    } catch {
+      setData([]);
+    }
   }
 
-  const handleDelete = (id) => {
-    // make request
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handleCheck = async (id) => {
+    await marcarComoConcluida(id);
+    getData();
+  }
+
+  const handleDelete = async (id) => {
+    await excluirAtividade(id);
+    getData();
   }
 
   return (
@@ -41,7 +50,7 @@ function VerAtividades() {
               <td>{item?.titulo}</td>
               <td>{item?.recompensa}</td>
               <td>{item?.frequencia}</td>
-              <td>{item?.concluida}</td>
+              <td>{item?.concluida.toString()}</td>
               <td> <a href={`atividades/editar/${item?.id}`}> Editar </a></td>
               <td><button onClick={() => handleCheck(item?.id)}>Marcar como Concluida</button></td>
               <td><button onClick={() => handleDelete(item?.id)}>Excluir</button></td>

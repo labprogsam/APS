@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { criarAtividade } from '../../services/atividade';
 
 function CriarAtividade() {
+  const history = useHistory();
+
   const [item, setItem] = useState({
     titulo: '',
     recompensa: '',
@@ -8,8 +12,10 @@ function CriarAtividade() {
     concluida: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await criarAtividade(item);
+    history.push("/atividades");
   }
 
   const handleChange = (e, field) => {
@@ -28,9 +34,6 @@ function CriarAtividade() {
 
       <label htmlFor="frequencia">Frequencia:</label>
       <input value={item?.frequencia} onChange={(e) => handleChange(e, 'frequencia')} type="text" id="frequencia" name="frequencia" />
-
-      {/* <label htmlFor="concluida">Concluida:</label>
-      <input value={item?.concluida} onChange={(e) => handleChange(e, 'concluida')} type="text" id="concluida" name="concluida" /> */}
 
       <button type="submit">Submit</button>
     </form>

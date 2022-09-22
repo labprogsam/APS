@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from "react-router-dom";
+import { editarAtividade, getAtividadePorId } from '../../services/atividade';
 
 function EditarAtividade() {
-  const {id} = useParams;
+  const history = useHistory();
+  const {id} = useParams();
 
-  const [item, setItem] = useState({
-    titulo: 'Titulo',
-    recompensa: 'recompensa',
-    frequencia: 'frequencia',
-    concluida: false,
-  });
+  const [item, setItem] = useState({});
+
+  const getData = async () => {
+    try {
+      console.log(id)
+      const response = await getAtividadePorId(id);
+      console.log(response.data)
+      setItem(response?.data);
+    } catch {
+      setItem({});
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [id]);
 
   const handleChange = (e, field) => {
     let newItem = item;
@@ -17,8 +29,10 @@ function EditarAtividade() {
     setItem({...newItem})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await editarAtividade({ id, ...item });
+    history.push("/atividades");
   }
 
   return (
