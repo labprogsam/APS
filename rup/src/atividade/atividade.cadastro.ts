@@ -15,7 +15,6 @@ export class CadastroAtividade {
   }
 
   async verAtividadePorId(id: string): Promise<Atividade | null> {
-    console.log(id)
     const atividade = await this.atividadeRepository.verAtividadePorId(id);
     return atividade;
   }

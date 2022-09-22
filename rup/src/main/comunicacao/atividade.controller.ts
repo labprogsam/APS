@@ -22,7 +22,7 @@ export class AtividadeController {
 
     const atividade = await this.fachada.verAtividadePorId(id);
 
-    if(atividade) response.status(200).json({}); 
+    if(!atividade) response.status(200).json(); 
 
     response.status(200).json(atividade);
   }

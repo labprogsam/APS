@@ -17,7 +17,7 @@ export class Fachada {
     return atividades;
   }
   async verAtividadePorId(id: string): Promise<Atividade | null> {
-    const atividade = await this.verAtividadePorId(id);
+    const atividade = await this.controladorAtividade.verAtividadePorId(id);
     return atividade;
   }
   async criarAtividade(atividade: Atividade): Promise<void> {
